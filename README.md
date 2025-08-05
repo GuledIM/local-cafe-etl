@@ -1,8 +1,3 @@
-### GitHub Repo Description (short)
-
-Café Order ETL Pipeline | Python, Docker & MySQL CLI & GUI Proof of Concept for local data management and PII-safe record storage.
-
-
 # Café Order ETL Pipeline
 
 This project is a Proof of Concept (PoC) for a local data management system designed to replace a paper-based order record system for a local café chain. The application extracts, transforms, and loads (ETL) order data from CSV files into a local MySQL database while ensuring data quality and removing Personally Identifiable Information (PII).
