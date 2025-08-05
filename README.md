@@ -42,7 +42,7 @@ Two user interfaces are included:
    ```bash
    git clone https://github.com/yourusername/cafe-order-etl.git
    cd cafe-order-etl
-````
+    ````
 
 2. **Set up Docker and MySQL:**
 
