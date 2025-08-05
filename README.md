@@ -117,10 +117,3 @@ This project is licensed under the MIT License.
 ## Contact
 
 For questions or feedback, please open an issue or contact \[[your.email@example.com](mailto:your.email@example.com)].
-
-```
-
----
-
-Would you like me to generate example `docker-compose.yml`, Python scripts, or help with presentation slide outlines as well?
-
