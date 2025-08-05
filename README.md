@@ -16,12 +16,12 @@ Two user interfaces are included:
 
 ## Features
 
-- [] Extract order data from CSV files
-- [] Transform data by cleaning, validating, and removing PII
-- [] Load sanitized data into a local MySQL database
-- [] CLI and GUI menus to manually control the ETL process
-- [] Display and clear screen functionality in the CLI
-- [] Designed with Docker for easy deployment
+-[ ] Extract order data from CSV files
+-[ ] Transform data by cleaning, validating, and removing PII
+-[ ] Load sanitized data into a local MySQL database
+-[ ] CLI and GUI menus to manually control the ETL process
+-[ ] Display and clear screen functionality in the CLI
+-[ ] Designed with Docker for easy deployment
 
 ---
 
