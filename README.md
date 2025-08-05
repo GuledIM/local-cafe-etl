@@ -112,8 +112,3 @@ This project provided valuable experience in:
 
 This project is licensed under the MIT License.
 
----
-
-## Contact
-
-For questions or feedback, please open an issue or contact \[[your.email@example.com](mailto:your.email@example.com)].
