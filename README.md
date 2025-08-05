@@ -2,8 +2,6 @@
 
 Café Order ETL Pipeline | Python, Docker & MySQL CLI & GUI Proof of Concept for local data management and PII-safe record storage.
 
----
-
 ### README.md
 
 ````markdown
@@ -125,4 +123,4 @@ For questions or feedback, please open an issue or contact \[[your.email@example
 ---
 
 Would you like me to generate example `docker-compose.yml`, Python scripts, or help with presentation slide outlines as well?
-```
+
