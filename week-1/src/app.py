@@ -32,6 +32,10 @@ def main():
             print("Invalid Input. Enter an integer like 1 or 2.")
 
 def extract():
+    """
+    Extracting the data from the CSV file into a DataFrame for Transformation.
+    Returning the DataFrame for further use.
+    """
 
     df = pd.read_csv(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-1\data\data.csv") #read file and save to local memory
 
@@ -40,25 +44,56 @@ def extract():
     
     
 def transform(df):
-    #Remove PII
-    df.drop(["Customer Name", "Card Number"], axis = 1, inplace = True)
+    """
+    Cleaning the DataFrame by removing PII columns and checking for missing values.
+    Returning the cleaned DataFrame.
+    """
 
+    #Remove PII
+    df.drop(["Customer Name", "Card Number"], axis=1, inplace=True)
+
+    #Check for null values
+    missing_values = df.isnull().sum()
+    print(f"\nMissing values per column after dropping PII:{missing_values}")
+
+    #Filling in the missing or null values
+
+    if missing_values.any():
+        df['Drink'].fillna('Unknown', inplace=True)
+        df['Qty'].fillna(0, inplace=True)
+        df['Price'].fillna(df['Price'].mean(), inplace=True)
+        df['Branch'].fillna('Unknown', inplace=True)
+        df['Payment Type'].fillna('Unknown', inplace=True)
+        #Date to be added later
+    
     return df
 
 
-    #Check for null values 
+def load(cleaned_data):
+    """
+    Saving to CSV for now before migrating to the database. 
+    """
 
-def extract_transform():
+    cleaned_data.to_csv(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-1\data\output.csv", index=False)
 
-    df = extract()
-    cleaned_data = transform(df)
 
-    print(cleaned_data)
 
+def etl():
+    """
+    Combining the Extract, Transform, and Load function into one concurrent function.
+    """
+
+    df = extract() #Run the extract function and save the DataFrame to a variable
+
+    cleaned_data = transform(df) #Run the DataFrame through the transform function to then save as a new variable.
+
+    print(cleaned_data) #Check that the data has been processed as wanted
 
     print("Extraction and Transformation complete")
 
-#Load function
+
+
+
     
 
 
