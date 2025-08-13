@@ -1,0 +1,6 @@
+Customer Name,Drink, Qty, Price,Branch,Payment Type,Card Number,Date/Time
+Dave,Latte, 2, £3.50,Epsom,Card,0123456,12/08/2024 10:23
+Sarah,Mocha, 1, £3.80,London,Card,1234567,13/08/2024 10:33
+James,Espresso, 3, £2.20,Manchester,Cash,,14/08/2024 10:39
+Lily,Cappuccino, 2, £3.00,Epsom,Card,2345678,15/08/2024 10:40
+Amina,Flat White, 1, £3.60,Bristol,Card,3456789,16/08/2024 10:42
