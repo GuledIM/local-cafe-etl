@@ -1,0 +1,2 @@
+I have created all the functions, next stepo is to set-up the database followed by working on the GUI and finally testing the pipeline.
+I would also like to add logs to observe the transformation and load functions. 

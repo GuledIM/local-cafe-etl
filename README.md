@@ -16,8 +16,8 @@ Two user interfaces are included:
 
 ## Features
 
--[ ] Extract order data from CSV files
--[ ] Transform data by cleaning, validating, and removing PII
+-[x] Extract order data from CSV files
+-[x] Transform data by cleaning, validating, and removing PII
 -[ ] Load sanitized data into a local MySQL database
 -[ ] CLI and GUI menus to manually control the ETL process
 -[ ] Display and clear screen functionality in the CLI
@@ -40,8 +40,8 @@ Two user interfaces are included:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/cafe-order-etl.git
-   cd cafe-order-etl
+   git clone https://github.com/GuledIM/local-cafe-etl.git
+   cd local-cafe-etl
     ````
 
 2. **Set up Docker and MySQL:**
@@ -83,21 +83,11 @@ Within both interfaces, users can:
 
 ## Reflections & Progress
 
-This project provided valuable experience in:
-
-* Building ETL pipelines using Python and MySQL
-* Designing dual interfaces (CLI and GUI) for different user types
-* Data cleaning and PII removal techniques
-* Using Docker to containerize and simplify deployment
 
 ---
 
 ## Future Improvements
 
-* Add automated scheduling for ETL runs
-* Implement role-based access control in GUI
-* Extend database schema for expanded order analytics
-* Enhance GUI with better UX design and error handling
 
 ---
 
