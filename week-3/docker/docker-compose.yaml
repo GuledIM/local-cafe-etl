@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+
+  db:
+    image: mysql
+    container_name: mysql_new_container_local_cafe_etl
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_DATABASE: "${MYSQL_DB}"
+    ports:
+      - "3307:3306"
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - type: volume
+        source: my_db_new
+        target: /var/lib/mysql
+  
+  adminer:
+    image: adminer
+    container_name: adminer_new_container_local_cafe_etl
+    restart: always
+    ports:
+      - 8081:8080
+
+volumes:
+  my_db_new:
