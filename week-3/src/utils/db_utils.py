@@ -5,7 +5,7 @@ import csv
 
 # DB functions 
 
-load_dotenv()
+load_dotenv(dotenv_path=r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-3\docker\.env") #specfify path to dotenv file
 host_name = os.environ.get("MYSQL_HOST")
 database_name = os.environ.get("MYSQL_DB")
 user_name = os.environ.get("MYSQL_USER")
@@ -51,9 +51,6 @@ def populate_database():
         conn.commit
 
         print("All tables added!")
-
-
-
 
 
 populate_database()

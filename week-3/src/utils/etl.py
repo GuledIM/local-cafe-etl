@@ -5,6 +5,7 @@ import os
 import uuid
 import hashlib
 from datetime import datetime
+from db_utils import *
 
 def fix_df_structure(df):
 
@@ -179,8 +180,49 @@ def load(branches, products, transactions):
     Saving to CSV for now before migrating to the database. 
     """
 
-    cleaned_data.to_csv(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-1\data\output.csv", index=False)
+    populate_database()
+
+    try:
+
+        # Preparing our data for batch insertion
+        branch_values = [(d["branch_id"], d["branch_name"]) for d in branches]
+
+        transaction_values = [
+            (t["transaction_id"], t["branch_id"], t["date"], t["time"], t["total"], t["trans_type"])
+            for t in transactions
+        ]
+
+        product_values = [
+            (p["product_id"], p["product_name"], p["price"])
+            for p in products
+        ]
+
+        branch_query = '''
+        INSERT IGNORE INTO branches (branch_id, branch_name)
+        VALUES (%s, %s);
+        '''
+        cursor.executemany(branch_query, branch_values)
+
+        transaction_query = '''
+        INSERT IGNORE INTO transactions (transaction_id, branch_id, date, time, total, trans_type)
+        VALUES (%s, %s, %s, %s, %s, %s);
+        '''
+        cursor.executemany(transaction_query, transaction_values)
+
+        product_query = '''
+        INSERT IGNORE INTO products (product_id, product_name, price)
+        VALUES (%s, %s, %s);
+        '''
+        cursor.executemany(product_query, product_values)
+
+        conn.commit()
+
+        '''Having them in the same block of code and only commting once at the end ensures that this part is atomic either they all work \
+           nothing is inserted.
+        '''
+    
+    except Exception as e:
+        conn.rollback()
 
 
-transform()
     
