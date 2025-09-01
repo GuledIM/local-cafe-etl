@@ -1,0 +1,16 @@
+Customer Name,Drink, Qty, Price,Branch,Payment Type,Card Number,Date/Time
+Dave,"Latte, 2, £3.50",Epsom,Card,0123456,12/08/2024 10:23
+Sarah,"Mocha, 1, £3.80",London,Card,1234567,13/08/2024 10:33
+James,"Espresso, 3, £2.20",Manchester,Cash,,14/08/2024 10:39
+Lily,"Cappuccino, 2, £3.00",Epsom,Card,2345678,15/08/2024 10:40
+Amina,"Flat White, 1, £3.60",Bristol,Card,3456789,16/08/2024 10:42
+Liam,"Cappuccino, 2, £3.10",Manchester,Cash,4567890,17/08/2024 09:15
+Emma,"Latte, 1, £3.50",London,Card,5678901,17/08/2024 11:05
+Noah,"Espresso, 3, £2.20",Bristol,Cash,6789012,18/08/2024 08:50
+Olivia,"Flat White, 2, £3.60",Epsom,Card,7890123,18/08/2024 10:20
+Ethan,"Mocha, 1, £3.80",London,Card,8901234,19/08/2024 09:45
+Sophia,"Cappuccino, 2, £3.00",Manchester,Cash,9012345,19/08/2024 10:55
+Mason,"Latte, 1, £3.50",Bristol,Card,1234567,20/08/2024 08:30
+Isabella,"Espresso, 2, £2.20",Epsom,Cash,2345678,20/08/2024 09:40
+Lucas,"Flat White, 3, £3.60",London,Card,3456789,21/08/2024 11:15
+Mia,"Mocha, 2, £3.80",Manchester,Card,4567890,21/08/2024 12:05
