@@ -45,15 +45,16 @@ def close_db_connection(cursor, conn):
     print("Database connection closed.")
 
 def populate_database():
-
-    with open(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-3\docker\tables.sql", 'r') as tables_sql:
+    with open(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-4\docker\tables.sql", 'r') as tables_sql:
         tables_command = tables_sql.read()
 
-        cursor.execute(tables_command)
+        # Split into individual statements
+        statements = [s.strip() for s in tables_command.split(';') if s.strip()]
 
-        conn.commit
+        for stmt in statements:
+            cursor.execute(stmt)
 
+        conn.commit()
+
+        # Confirmation that tables have been created
         print("All tables added!")
-
-
-populate_database()

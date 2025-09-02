@@ -18,10 +18,10 @@ Two user interfaces are included:
 
 -[x] Extract order data from CSV files
 -[x] Transform data by cleaning, validating, and removing PII
--[ ] Load sanitized data into a local MySQL database
+-[x] Load sanitized data into a local MySQL database
 -[ ] CLI and GUI menus to manually control the ETL process
 -[ ] Display and clear screen functionality in the CLI
--[ ] Designed with Docker for easy deployment
+-[x] Designed with Docker for easy deployment
 
 ---
 
@@ -82,6 +82,9 @@ Within both interfaces, users can:
 ---
 
 ## Reflections & Progress
+
+Currently completed all functions and tested manually the ETL functions and for the CLI application.
+Next steps for now are to complete the CLI application and begin thw Tkinker and Flask application.
 
 
 ---

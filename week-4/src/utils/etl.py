@@ -51,8 +51,8 @@ def split_datetime(df):
         errors='coerce'  # invalid ones become NaT instead of breaking
     )
 
-    df['Date'] = df['Date/Time'].dt.date
-    df['Time'] = df['Date/Time'].dt.time
+    df['Date'] = df['Date/Time'].dt.strftime("%Y-%m-%d")
+    df['Time'] = df['Date/Time'].dt.strftime("%H:%M:%S")
 
     print("After splitting datetime:\n", df.head(10))
     return df
@@ -60,9 +60,9 @@ def split_datetime(df):
 
 
 def remove_pii(df):
-    #Remove PII
-    df.drop(["Customer Name", "Card Number"], axis=1, inplace=True)
 
+    df.drop(["Customer Name", "Card Number"], axis=1, inplace=True, errors="ignore")
+    
     return df
 
 def check_for_missing_vals(df):
@@ -99,7 +99,6 @@ def normalisation(df):
     Ensuring that we account for any branches or products that have been already been added into the database to stop duplicates
     """
 
-    print(df)
 
     
     branches = [] 
@@ -129,7 +128,7 @@ def normalisation(df):
             products.append({
                     "product_id": product_id,
                     "product_name": product_name,
-                    "Price": price
+                    "price": price
                 })
         else:
             product_id = seen_products[product_name]
@@ -149,7 +148,6 @@ def normalisation(df):
                 "trans_type": row['Payment Type']
             })
 
-    print(transactions)
 
     return branches, transactions, products
 
@@ -172,10 +170,10 @@ def transform(df):
     Adding the GUIDs
     Returning the cleaned DataFrame.
     """
+    df = remove_pii(df)
     df = fix_df_structure(df)
     df = split_items(df)
     df = split_datetime(df)
-    df = remove_pii(df)
     df, missing_values  = check_for_missing_vals(df)
     df = fill_missing_vals(df, missing_values)
 
@@ -185,14 +183,14 @@ def transform(df):
 
 
 
-def load(branches, products, transactions):
+def load(branches, transactions, products):
     """
-    Saving to CSV for now before migrating to the database. 
+    Saving to Database. 
     """
 
-    populate_database()
 
     try:
+
 
         # Preparing our data for batch insertion
         branch_values = [(d["branch_id"], d["branch_name"]) for d in branches]
@@ -206,6 +204,7 @@ def load(branches, products, transactions):
             (p["product_id"], p["product_name"], p["price"])
             for p in products
         ]
+
 
         branch_query = '''
         INSERT IGNORE INTO branches (branch_id, branch_name)
@@ -228,11 +227,10 @@ def load(branches, products, transactions):
         conn.commit()
 
         '''Having them in the same block of code and only commting once at the end ensures that this part is atomic either they all work \
-           nothing is inserted.
+           or nothing is inserted.
         '''
     
     except Exception as e:
         conn.rollback()
 
 
-    

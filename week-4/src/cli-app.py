@@ -3,6 +3,7 @@ from utils.db_utils import *
 
 def main():
 
+
     state = {}
 
 
@@ -23,6 +24,7 @@ def main():
             x = int(x)
             if x == 0:
                 print("Closing down...")
+                close_db_connection(cursor, conn)
                 exit() #exit the loop after printing closing down
                 time.sleep(2) #delay the clearing of the terminal
                 clr_terminal()
@@ -38,9 +40,9 @@ def main():
                 print(state)
                 state["transformed"] = transform(state["raw"])
                 print(state)
-                branches, products, transactions = normalisation(state["transformed"])
+                branches, transactions, products = normalisation(state["transformed"])
                 print(state)
-                load(branches, products, transactions)
+                load(branches, transactions, products)
 
 
         else:
