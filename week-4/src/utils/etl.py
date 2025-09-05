@@ -78,12 +78,13 @@ def fill_missing_vals(df, missing_values):
     #Filling in the missing or null values
 
     if missing_values.any():
-        df['Drink'].fillna('Unknown', inplace=True)
-        df['Qty'].fillna(0, inplace=True)
-        df['Price'].fillna(df['Price'].mean(), inplace=True)
-        df['Branch'].fillna('Unknown', inplace=True)
-        df['Payment Type'].fillna('Unknown', inplace=True)
-        #Date to be added later
+        df = df.fillna({
+    'Drink': 'Unknown',
+    'Qty': 0,
+    'Price': df['Price'].mean(),
+    'Branch': 'Unknown',
+    'Payment Type': 'Unknown'
+})
     
     return df
 
@@ -133,18 +134,19 @@ def normalisation(df):
         else:
             product_id = seen_products[product_name]
 
-        transaction_id = generate_guid(branch_id, row['Date'], row['Time'], row['Price']* row['Qty'] , row['Payment Type'])
-
         total = row['Price']* row['Qty']
         rounded_total = round(total, 2)
-        print(rounded_total)
+
+        transaction_id = generate_guid(branch_id, row['Date'], row['Time'], product_id, rounded_total, row['Payment Type'])
+
 
         transactions.append({
                 "transaction_id": transaction_id,
                 "branch_id": branch_id,
                 "date": row['Date'],
                 "time": row['Time'],
-                "total": total,
+                "product_id":product_id,
+                "total": rounded_total,
                 "trans_type": row['Payment Type']
             })
 
@@ -183,11 +185,10 @@ def transform(df):
 
 
 
-def load(branches, transactions, products):
+def load(conn, cursor, branches, transactions, products):
     """
     Saving to Database. 
     """
-
 
     try:
 
@@ -196,7 +197,7 @@ def load(branches, transactions, products):
         branch_values = [(d["branch_id"], d["branch_name"]) for d in branches]
 
         transaction_values = [
-            (t["transaction_id"], t["branch_id"], t["date"], t["time"], t["total"], t["trans_type"])
+            (t["transaction_id"], t["branch_id"], t["date"], t["time"], t["product_id"], t["total"], t["trans_type"])
             for t in transactions
         ]
 
@@ -213,8 +214,8 @@ def load(branches, transactions, products):
         cursor.executemany(branch_query, branch_values)
 
         transaction_query = '''
-        INSERT IGNORE INTO transactions (transaction_id, branch_id, date, time, total, trans_type)
-        VALUES (%s, %s, %s, %s, %s, %s);
+        INSERT IGNORE INTO transactions (transaction_id, branch_id, date, time, product_id, total, trans_type)
+        VALUES (%s, %s, %s, %s, %s, %s, %s);
         '''
         cursor.executemany(transaction_query, transaction_values)
 
@@ -231,6 +232,7 @@ def load(branches, transactions, products):
         '''
     
     except Exception as e:
-        conn.rollback()
+        print("Something went wrong, rolling back:", e)
+        conn.rollback()   
 
 

@@ -33,10 +33,10 @@ def db_connection():
         
     except Exception as e:
         print(f"Failed to connect: {e}")
+        
 
-conn , cursor = db_connection()
 
-def close_db_connection(cursor, conn):
+def close_db_connection(conn, cursor):
     if cursor:
         cursor.close()
     print("Cursor closed.")
@@ -44,7 +44,7 @@ def close_db_connection(cursor, conn):
         conn.close()
     print("Database connection closed.")
 
-def populate_database():
+def populate_database(conn, cursor):
     with open(r"C:\Users\Gen-UK-Student\Documents\Projects\local-cafe-etl\week-4\docker\tables.sql", 'r') as tables_sql:
         tables_command = tables_sql.read()
 
@@ -58,3 +58,21 @@ def populate_database():
 
         # Confirmation that tables have been created
         print("All tables added!")
+
+def check_tables(conn, cursor):
+    required_tables = ["branches", "transactions", "products"]
+
+    for table in required_tables:
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM information_schema.tables
+            WHERE table_schema = DATABASE() AND table_name = %s;
+        """, (table,))
+        exists = cursor.fetchone()[0]
+
+        if not exists:
+            print(f"Tables does not exist. Populating database...")
+            populate_database(conn, cursor)   # <-- your custom function that runs CREATE TABLE
+            break
+        else:
+            print(f"Tables already exists")

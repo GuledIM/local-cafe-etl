@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ETL Dashboard</title>
+    <style>
+      body { text-align: center; font-family: Arial, sans-serif; }
+      button { padding: 15px 30px; font-size: 18px; margin: 10px; }
+      #message { color: green; font-weight: bold; margin: 20px; }
+    </style>
+  </head>
+  <body>
+    <h1>ETL Controller</h1>
+
+    <div id="message">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {{ messages[0] }}
+        {% endif %}
+      {% endwith %}
+    </div>
+
+    <form action="/extract" method="post">
+      <button type="submit">Run Extract</button>
+    </form>
+
+    <form action="/transform" method="post">
+      <button type="submit">Run Transform</button>
+    </form>
+
+    <form action="/load" method="post">
+      <button type="submit">Run Load</button>
+    </form>
+  </body>
+</html>

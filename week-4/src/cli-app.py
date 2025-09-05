@@ -3,13 +3,18 @@ from utils.db_utils import *
 
 def main():
 
+    conn, cursor = db_connection()
+    check_tables(conn, cursor)
+
+    clr_terminal()
+
 
     state = {}
 
 
     while True: 
         
-        print("\n\tMain Menu:")
+        print("\n\tETL Menu:")
         print("0 - Exit App")
         print("1 - Extract")
         print("2 - Transform")
@@ -30,19 +35,12 @@ def main():
                 clr_terminal()
             elif x == 1:
                 state["raw"] = extract()
-                print(state)
                 print("The data has been extracted and is now ready for transformation...")
             elif x == 2:
-                print(state)
                 state["transformed"] = transform(state["raw"])
-                print(state)
             elif x == 3:
-                print(state)
-                state["transformed"] = transform(state["raw"])
-                print(state)
                 branches, transactions, products = normalisation(state["transformed"])
-                print(state)
-                load(branches, transactions, products)
+                load(conn, cursor, branches, transactions, products)
 
 
         else:

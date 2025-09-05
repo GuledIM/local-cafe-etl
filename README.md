@@ -62,8 +62,8 @@ Two user interfaces are included:
 
 ## Usage
 
-* **CLI:** Run `python cli_menu.py` to launch the command-line interface.
-* **GUI:** Run `python gui_menu.py` to open the graphical user interface.
+* **CLI:** Run `python cli_app.py` to launch the command-line interface.
+* **GUI:** Run `python gui_app.py` to open the graphical user interface.
 
 Within both interfaces, users can:
 
