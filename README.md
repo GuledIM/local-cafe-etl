@@ -30,7 +30,8 @@ Two user interfaces are included:
 - Python  
 - MySQL  
 - Docker  
-- Flask or Tkinter (for Windows GUI) - Yet to decide
+- Flask Web based GUI
+- Tkinter (for Windows GUI) 
 - pandas (for data transformation)  
 
 ---
@@ -62,8 +63,10 @@ Two user interfaces are included:
 
 ## Usage
 
-* **CLI:** Run `python cli_app.py` to launch the command-line interface.
-* **GUI:** Run `python gui_app.py` to open the graphical user interface.
+* **CLI:** Run `python cli-app.py` to launch the command-line interface.
+* **GUI:** Run `python tkinter-app.py` to open the local graphical user interface.
+* **GUI:** Run `python flask-app.py` to run the graphical user interface before laucnhing in your browser.
+
 
 Within both interfaces, users can:
 
@@ -85,6 +88,7 @@ Within both interfaces, users can:
 
 Currently completed all functions and tested manually the ETL functions and for the CLI application.
 Next steps for now are to complete the CLI application and begin thw Tkinker and Flask application.
+Completed all three menu options - Need to debug the Flask menu for issues in loading data. 
 
 
 ---
