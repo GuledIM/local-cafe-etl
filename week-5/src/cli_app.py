@@ -1,8 +1,7 @@
 from utils.etl import *
 from utils.db_utils import *
-from src.main_menu import *
 
-def main():
+def cli_app(conn, cursor):
 
 
 
@@ -29,7 +28,7 @@ def main():
             x = int(x)
             if x == 0:
                 clr_terminal()
-                close_db_connection(conn, cursor)
+                
                 return
             elif x == 1:
                 state["raw"] = extract()
@@ -50,6 +49,3 @@ def main():
 def clr_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')#clear terminal
 
-def cli_app_run():
-    if __name__ == '__main__':
-        main()

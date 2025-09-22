@@ -11,7 +11,6 @@ database_name = os.environ.get("MYSQL_DB")
 user_name = os.environ.get("MYSQL_USER")
 user_password = os.environ.get("MYSQL_PASSWORD")
 
-print(host_name, database_name, user_name, user_password)
 
 
 def db_connection():
@@ -72,7 +71,7 @@ def check_tables(conn, cursor):
 
         if not exists:
             print(f"Tables does not exist. Populating database...")
-            populate_database(conn, cursor)   # <-- your custom function that runs CREATE TABLE
+            populate_database(conn, cursor) 
             break
         else:
             print(f"Tables already exists")

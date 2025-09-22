@@ -174,8 +174,8 @@ def transform(df):
     """
     df = remove_pii(df)
     df = fix_df_structure(df)
-    df = split_items(df)
     df = split_datetime(df)
+    df = split_items(df)
     df, missing_values  = check_for_missing_vals(df)
     df = fill_missing_vals(df, missing_values)
 
@@ -196,16 +196,16 @@ def load_to_db(conn, cursor, branches, transactions, products):
         # Preparing our data for batch insertion
         branch_values = [(d["branch_id"], d["branch_name"]) for d in branches]
 
-        transaction_values = [
-            (t["transaction_id"], t["branch_id"], t["date"], t["time"], t["product_id"], t["total"], t["trans_type"])
-            for t in transactions
-        ]
 
         product_values = [
             (p["product_id"], p["product_name"], p["price"])
             for p in products
         ]
 
+        transaction_values = [
+            (t["transaction_id"], t["branch_id"], t["date"], t["time"], t["product_id"], t["total"], t["trans_type"])
+            for t in transactions
+        ]
 
         branch_query = '''
         INSERT IGNORE INTO branches (branch_id, branch_name)
@@ -213,17 +213,17 @@ def load_to_db(conn, cursor, branches, transactions, products):
         '''
         cursor.executemany(branch_query, branch_values)
 
-        transaction_query = '''
-        INSERT IGNORE INTO transactions (transaction_id, branch_id, date, time, product_id, total, trans_type)
-        VALUES (%s, %s, %s, %s, %s, %s, %s);
-        '''
-        cursor.executemany(transaction_query, transaction_values)
-
         product_query = '''
         INSERT IGNORE INTO products (product_id, product_name, price)
         VALUES (%s, %s, %s);
         '''
         cursor.executemany(product_query, product_values)
+
+        transaction_query = '''
+        INSERT IGNORE INTO transactions (transaction_id, branch_id, date, time, product_id, total, trans_type)
+        VALUES (%s, %s, %s, %s, %s, %s, %s);
+        '''
+        cursor.executemany(transaction_query, transaction_values)
 
         conn.commit()
 

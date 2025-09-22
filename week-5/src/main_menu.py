@@ -8,6 +8,10 @@ from cli_app import *
 
 def main_menu():
 
+    conn, cursor = db_connection()
+
+    check_tables(conn, cursor)
+
 
 
     while True:
@@ -22,16 +26,16 @@ def main_menu():
         if choice == "1":
             print("Launching Flask Web App...")
             # Run Flask app
-            app_run()
+            flask_app(conn, cursor)
 
         elif choice == "2":
             print("Launching Tkinter GUI App...")
             # Run Tkinter app
-            run_tkinter_app()
+            run_tkinter_app(conn, cursor)
         elif choice == "3":
             print("Launching CLI App...")
             # Run CLI app
-            cli_app_run()
+            cli_app(conn, cursor)
         elif choice == "4":
             print("Exiting. Goodbye!")
             exit()

@@ -30,5 +30,10 @@
     <form action="/load" method="post">
       <button type="submit">Run Load</button>
     </form>
+
+    <form action="{{ url_for('shutdown') }}" method="post">
+      <button type="submit">Exit Application</button>
+    </form>
+
   </body>
 </html>
